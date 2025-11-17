@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* Custom fonts */
+.font-handwritten { font-family: 'Dancing Script', cursive; }
+.font-slanted { font-family: 'Roboto Slab', serif; font-style: italic; }
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Caveat', cursive;
+}
+
+/* Or if you want to keep it specific to handwritten class */
+.font-handwritten {
+  font-family: 'Caveat', cursive;
+}
