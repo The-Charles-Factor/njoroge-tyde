@@ -105,7 +105,7 @@ function App() {
   const pageItems = filtered.slice((page - 1) * pageSize, page * pageSize);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 text-gray-800 font-handwritten">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-200 font-handwritten">
       <Navbar />
 
       <main className="flex-1 container mx-auto px-3 py-3 max-w-7xl">
@@ -114,17 +114,17 @@ function App() {
           <div className="flex gap-2">
             <button 
               onClick={() => setShowForm(!showForm)}
-              className="bg-blue-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-blue-700 transition"
+              className="bg-blue-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-blue-500 transition shadow-lg"
             >
               {showForm ? 'Hide Form' : 'Add Item'}
             </button>
             <button 
               onClick={exportJSON}
-              className="bg-gray-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-700 transition"
+              className="bg-gray-700 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-600 transition shadow-lg"
             >
               Backup
             </button>
-            <label className="bg-gray-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-700 transition cursor-pointer">
+            <label className="bg-gray-700 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-600 transition cursor-pointer shadow-lg">
               Import
               <input type="file" accept="application/json" onChange={(e) => { 
                 if(e.target.files[0]) importJSON(e.target.files[0]); 
@@ -136,20 +136,20 @@ function App() {
             value={q}
             onChange={(e) => { setQ(e.target.value); setPage(1); }}
             placeholder="Search items..."
-            className="flex-1 px-3 py-1.5 rounded border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-400 text-xs"
+            className="flex-1 px-3 py-1.5 rounded border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-xs shadow-inner"
           />
         </div>
 
         {/* Collapsible Form */}
         {showForm && (
-          <div className="mb-4 bg-white rounded border border-gray-200 p-3">
+          <div className="mb-4 bg-gray-800 rounded-lg border border-gray-700 p-3 shadow-xl">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-xs font-semibold">
+              <h3 className="text-xs font-semibold text-white">
                 {editingItem ? 'Edit Item' : 'Add New Item'}
               </h3>
               <button 
                 onClick={() => { setShowForm(false); setEditingItem(null); }}
-                className="text-gray-500 hover:text-gray-700 text-xs"
+                className="text-gray-400 hover:text-white text-xs transition-colors"
               >
                 Close
               </button>
@@ -172,9 +172,9 @@ function App() {
         <div className="flex flex-col lg:flex-row gap-3">
           {/* Main Content */}
           <div className="lg:w-3/4">
-            <div className="bg-white rounded border border-gray-200">
+            <div className="bg-gray-800 rounded-lg border border-gray-700 shadow-xl">
               {/* Filters */}
-              <div className="p-3 border-b border-gray-200">
+              <div className="p-3 border-b border-gray-700">
                 <Filters
                   categories={categories}
                   sections={sections}
@@ -197,26 +197,26 @@ function App() {
               </div>
 
               {/* Pagination */}
-              <div className="px-3 py-2 bg-gray-50 border-t border-gray-200">
+              <div className="px-3 py-2 bg-gray-750 border-t border-gray-700">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-1 text-xs">
-                  <div className="text-gray-600">
+                  <div className="text-gray-400">
                     {filtered.length === 0 ? 0 : ((page-1)*pageSize + 1)} - {Math.min(page*pageSize, filtered.length)} of {filtered.length}
                   </div>
                   <div className="flex items-center gap-1">
                     <button 
                       onClick={() => setPage(p => Math.max(1, p-1))}
                       disabled={page === 1}
-                      className="px-2 py-1 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 text-xs"
+                      className="px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded hover:bg-gray-600 disabled:opacity-50 text-xs transition-colors"
                     >
                       Prev
                     </button>
-                    <div className="px-2 py-1 border border-gray-300 rounded bg-white text-xs">
+                    <div className="px-2 py-1 border border-gray-600 bg-gray-800 text-white rounded text-xs">
                       {page} / {totalPages}
                     </div>
                     <button 
                       onClick={() => setPage(p => Math.min(totalPages, p+1))}
                       disabled={page === totalPages}
-                      className="px-2 py-1 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 text-xs"
+                      className="px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded hover:bg-gray-600 disabled:opacity-50 text-xs transition-colors"
                     >
                       Next
                     </button>
@@ -228,24 +228,24 @@ function App() {
 
           {/* Sidebar */}
           <div className="lg:w-1/4">
-            <div className="bg-white rounded border border-gray-200 p-3 sticky top-4">
-              <h3 className="text-xs font-semibold mb-2">Overview</h3>
+            <div className="bg-gray-800 rounded-lg border border-gray-700 p-3 sticky top-4 shadow-xl">
+              <h3 className="text-xs font-semibold mb-2 text-white">Overview</h3>
               <div className="space-y-1 text-xs">
-                <div className="flex justify-between">
+                <div className="flex justify-between text-gray-300">
                   <span>Total Items</span>
-                  <span className="font-medium">{items.length}</span>
+                  <span className="font-medium text-white">{items.length}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-gray-300">
                   <span>Filtered</span>
-                  <span className="font-medium">{filtered.length}</span>
+                  <span className="font-medium text-white">{filtered.length}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-gray-300">
                   <span>Categories</span>
-                  <span className="font-medium">{categories.length - 1}</span>
+                  <span className="font-medium text-white">{categories.length - 1}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-gray-300">
                   <span>Sections</span>
-                  <span className="font-medium">{sections.length - 1}</span>
+                  <span className="font-medium text-white">{sections.length - 1}</span>
                 </div>
               </div>
             </div>
@@ -261,7 +261,7 @@ function App() {
         hideProgressBar={false}
         closeOnClick
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
     </div>
   );

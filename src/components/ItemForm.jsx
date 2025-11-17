@@ -56,85 +56,85 @@ export default function ItemForm({ item, onSubmit, onCancel }) {
     <form onSubmit={submit} className="space-y-2 text-sm">
       {/* Required Fields */}
       <div>
-        <label className="block text-gray-700 mb-1 text-xs font-medium">Code *</label>
+        <label className="block text-gray-300 mb-1 text-xs font-medium">Code *</label>
         <input 
           value={values.code} 
           onChange={e => change('code', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
           placeholder="Item code"
         />
       </div>
 
       <div>
-        <label className="block text-gray-700 mb-1 text-xs font-medium">Name *</label>
+        <label className="block text-gray-300 mb-1 text-xs font-medium">Name *</label>
         <input 
           value={values.name} 
           onChange={e => change('name', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
           placeholder="Item name"
         />
       </div>
 
       <div>
-        <label className="block text-gray-700 mb-1 text-xs font-medium">Category *</label>
+        <label className="block text-gray-300 mb-1 text-xs font-medium">Category *</label>
         <input 
           value={values.category} 
           onChange={e => change('category', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
           placeholder="e.g., Kitchen Faucets"
         />
       </div>
 
       <div>
-        <label className="block text-gray-700 mb-1 text-xs font-medium">Price *</label>
+        <label className="block text-gray-300 mb-1 text-xs font-medium">Price *</label>
         <input 
           value={values.price} 
           onChange={e => change('price', e.target.value)} 
           type="number" 
-          className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
           placeholder="Selling price"
         />
       </div>
 
       {/* Optional Fields */}
       <div>
-        <label className="block text-gray-700 mb-1 text-xs font-medium">Section</label>
+        <label className="block text-gray-300 mb-1 text-xs font-medium">Section</label>
         <input 
           value={values.section} 
           onChange={e => change('section', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
           placeholder="e.g., Mixers"
         />
       </div>
 
       <div>
-        <label className="block text-gray-700 mb-1 text-xs font-medium">Color</label>
+        <label className="block text-gray-300 mb-1 text-xs font-medium">Color</label>
         <input 
           value={values.color} 
           onChange={e => change('color', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
           placeholder="Optional color"
         />
       </div>
 
       <div>
-        <label className="block text-gray-700 mb-1 text-xs font-medium">Lower Price</label>
+        <label className="block text-gray-300 mb-1 text-xs font-medium">Lower Price</label>
         <input 
           value={values.lowerPrice} 
           onChange={e => change('lowerPrice', e.target.value)} 
           type="number" 
-          className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
           placeholder="Optional minimum discount"
         />
       </div>
 
       <div>
-        <label className="block text-gray-700 mb-1 text-xs font-medium">Quantity</label>
+        <label className="block text-gray-300 mb-1 text-xs font-medium">Quantity</label>
         <input 
           value={values.qty} 
           onChange={e => change('qty', e.target.value)} 
           type="number" 
-          className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
           placeholder="Optional quantity"
         />
       </div>
@@ -143,21 +143,21 @@ export default function ItemForm({ item, onSubmit, onCancel }) {
       <div className="flex gap-2 pt-2">
         <button 
           type="submit" 
-          className="flex-1 px-3 py-2 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700 transition-colors"
+          className="flex-1 px-3 py-2 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-500 transition-colors"
         >
           {item ? 'Update' : 'Save'} Item
         </button>
         <button 
           type="button" 
           onClick={() => { setValues(blank); if(onCancel) onCancel(); }} 
-          className="px-3 py-2 border border-gray-300 rounded text-sm font-medium hover:bg-gray-50 transition-colors"
+          className="px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded text-sm font-medium hover:bg-gray-600 transition-colors"
         >
           {item ? 'Cancel' : 'Clear'}
         </button>
       </div>
 
       {/* Required Fields Note */}
-      <div className="text-xs text-gray-500 text-center pt-1">
+      <div className="text-xs text-gray-400 text-center pt-1">
         * Required fields
       </div>
     </form>
