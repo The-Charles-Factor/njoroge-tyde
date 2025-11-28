@@ -14,20 +14,21 @@ function App() {
   const [category, setCategory] = useState('All');
   const [section, setSection] = useState('All');
   const [page, setPage] = useState(1);
-  const [editingItem, setEditingItem] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [editingItem, setEditingItem] = useState(null);
   const pageSize = 8;
 
+  // Load items on mount
   useEffect(() => {
     (async () => {
-      await ensureSeeded();
+      await ensureSeeded(); // Keep DB as is if seeded
       await loadItems();
     })();
   }, []);
 
   const loadItems = async () => {
     const all = await db.items.toArray();
-    all.sort((a,b) => a.name.localeCompare(b.name) || a.id - b.id);
+    all.sort((a, b) => a.name.localeCompare(b.name) || a.id - b.id);
     setItems(all);
   };
 
@@ -66,7 +67,6 @@ function App() {
       const text = await file.text();
       const data = JSON.parse(text);
       if (!Array.isArray(data)) throw new Error('Invalid file');
-      await db.items.clear();
       await db.items.bulkAdd(data.map(d => {
         const copy = { ...d };
         delete copy.id;
@@ -105,25 +105,30 @@ function App() {
   const pageItems = filtered.slice((page - 1) * pageSize, page * pageSize);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-200 font-handwritten">
-      <Navbar />
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-200 font-sans">
+      
+      {/* Navbar with callback */}
+      <Navbar onAddItemClick={() => { setEditingItem(null); setShowForm(true); }} />
 
       <main className="flex-1 container mx-auto px-3 py-3 max-w-7xl">
+
         {/* Header Actions */}
         <div className="flex flex-col sm:flex-row gap-2 mb-4">
           <div className="flex gap-2">
             <button 
-              onClick={() => setShowForm(!showForm)}
+              onClick={() => { setEditingItem(null); setShowForm(!showForm); }}
               className="bg-blue-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-blue-500 transition shadow-lg"
             >
               {showForm ? 'Hide Form' : 'Add Item'}
             </button>
+
             <button 
               onClick={exportJSON}
               className="bg-gray-700 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-600 transition shadow-lg"
             >
               Backup
             </button>
+
             <label className="bg-gray-700 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-600 transition cursor-pointer shadow-lg">
               Import
               <input type="file" accept="application/json" onChange={(e) => { 
@@ -170,9 +175,11 @@ function App() {
         )}
 
         <div className="flex flex-col lg:flex-row gap-3">
+
           {/* Main Content */}
           <div className="lg:w-3/4">
             <div className="bg-gray-800 rounded-lg border border-gray-700 shadow-xl">
+
               {/* Filters */}
               <div className="p-3 border-b border-gray-700">
                 <Filters
@@ -223,6 +230,7 @@ function App() {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -250,6 +258,7 @@ function App() {
               </div>
             </div>
           </div>
+
         </div>
       </main>
 

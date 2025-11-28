@@ -1,165 +1,84 @@
-import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
 
-const blank = {
-  code: '',
-  name: '',
-  color: '',
-  price: '',
-  lowerPrice: '',
-  qty: '',
-  category: '',
-  section: ''
-};
-
-export default function ItemForm({ item, onSubmit, onCancel }) {
-  const [values, setValues] = useState(blank);
-
-  useEffect(() => {
-    if (item) {
-      setValues({
-        code: item.code || '',
-        name: item.name || '',
-        color: item.color || '',
-        price: item.price ?? '',
-        lowerPrice: item.lowerPrice ?? '',
-        qty: item.qty ?? '',
-        category: item.category || '',
-        section: item.section || ''
-      });
-    } else {
-      setValues(blank);
-    }
-  }, [item]);
-
-  function change(k, v) {
-    setValues(prev => ({ ...prev, [k]: v }));
-  }
-
-  function submit(e) {
-    e.preventDefault();
-    if (!values.code || !values.name || !values.category || !values.price) {
-      toast.error('Please fill required fields: Code, Name, Category, and Price');
-      return;
-    }
-    const payload = {
-      ...values,
-      price: Number(values.price),
-      lowerPrice: values.lowerPrice ? Number(values.lowerPrice) : null,
-      qty: values.qty ? Number(values.qty) : 0
-    };
-    onSubmit(payload);
-    setValues(blank);
-  }
+export default function Navbar({ onAddItemClick }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <form onSubmit={submit} className="space-y-2 text-sm">
-      {/* Required Fields */}
-      <div>
-        <label className="block text-gray-300 mb-1 text-xs font-medium">Code *</label>
-        <input 
-          value={values.code} 
-          onChange={e => change('code', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-          placeholder="Item code"
-        />
-      </div>
+    <nav className="bg-gray-900 border-b border-gray-800 text-white shadow-xl sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="flex justify-between items-center h-16">
 
-      <div>
-        <label className="block text-gray-300 mb-1 text-xs font-medium">Name *</label>
-        <input 
-          value={values.name} 
-          onChange={e => change('name', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-          placeholder="Item name"
-        />
-      </div>
+          {/* Brand */}
+          <div className="flex-shrink-0 flex items-center mx-auto md:mx-0">
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+              Njoroge
+            </h1>
+          </div>
 
-      <div>
-        <label className="block text-gray-300 mb-1 text-xs font-medium">Category *</label>
-        <input 
-          value={values.category} 
-          onChange={e => change('category', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-          placeholder="e.g., Kitchen Faucets"
-        />
-      </div>
+          {/* Desktop Action */}
+          <div className="hidden md:flex">
+            <button
+              onClick={onAddItemClick}  // <--- call parent callback
+              className="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold shadow-lg 
+                hover:bg-blue-500 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-150 
+                border border-blue-500/40"
+            >
+              Add Item
+            </button>
+          </div>
 
-      <div>
-        <label className="block text-gray-300 mb-1 text-xs font-medium">Price *</label>
-        <input 
-          value={values.price} 
-          onChange={e => change('price', e.target.value)} 
-          type="number" 
-          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-          placeholder="Selling price"
-        />
-      </div>
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden absolute right-4">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="focus:outline-none p-2 rounded-lg bg-gray-800 hover:bg-gray-700 
+                border border-gray-700 transition"
+            >
+              <svg
+                className="w-6 h-6 text-gray-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {isMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+        </div>
 
-      {/* Optional Fields */}
-      <div>
-        <label className="block text-gray-300 mb-1 text-xs font-medium">Section</label>
-        <input 
-          value={values.section} 
-          onChange={e => change('section', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-          placeholder="e.g., Mixers"
-        />
+        {/* Mobile Dropdown */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-gray-800 border border-gray-700 rounded-lg mt-2 shadow-2xl">
+            <div className="px-2 pt-2 pb-3">
+              <button
+                onClick={() => { 
+                  onAddItemClick(); // <--- call parent callback
+                  setIsMenuOpen(false); 
+                }}
+                className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold text-base 
+                  shadow-lg hover:bg-blue-500 hover:shadow-xl transform hover:scale-105 
+                  transition-all duration-150"
+              >
+                Add New Item
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-
-      <div>
-        <label className="block text-gray-300 mb-1 text-xs font-medium">Color</label>
-        <input 
-          value={values.color} 
-          onChange={e => change('color', e.target.value)} 
-          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-          placeholder="Optional color"
-        />
-      </div>
-
-      <div>
-        <label className="block text-gray-300 mb-1 text-xs font-medium">Lower Price</label>
-        <input 
-          value={values.lowerPrice} 
-          onChange={e => change('lowerPrice', e.target.value)} 
-          type="number" 
-          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-          placeholder="Optional minimum discount"
-        />
-      </div>
-
-      <div>
-        <label className="block text-gray-300 mb-1 text-xs font-medium">Quantity</label>
-        <input 
-          value={values.qty} 
-          onChange={e => change('qty', e.target.value)} 
-          type="number" 
-          className="w-full px-2 py-1 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
-          placeholder="Optional quantity"
-        />
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex gap-2 pt-2">
-        <button 
-          type="submit" 
-          className="flex-1 px-3 py-2 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-500 transition-colors"
-        >
-          {item ? 'Update' : 'Save'} Item
-        </button>
-        <button 
-          type="button" 
-          onClick={() => { setValues(blank); if(onCancel) onCancel(); }} 
-          className="px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded text-sm font-medium hover:bg-gray-600 transition-colors"
-        >
-          {item ? 'Cancel' : 'Clear'}
-        </button>
-      </div>
-
-      {/* Required Fields Note */}
-      <div className="text-xs text-gray-400 text-center pt-1">
-        * Required fields
-      </div>
-    </form>
+    </nav>
   );
 }

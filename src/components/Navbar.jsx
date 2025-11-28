@@ -4,31 +4,36 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-gradient-to-r from-blue-800 via-blue-600 to-blue-800 text-white shadow-xl sticky top-0 z-50">
+    <nav className="bg-gray-900 border-b border-gray-800 text-white shadow-xl sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        
         <div className="flex justify-between items-center h-16">
-          {/* Logo / Brand - Centered on mobile */}
+
+          {/* Brand */}
           <div className="flex-shrink-0 flex items-center mx-auto md:mx-0">
-            <h1 className="text-2xl md:text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-100">
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
               Njoroge
             </h1>
           </div>
 
-          {/* Desktop Action Button */}
+          {/* Desktop Action */}
           <div className="hidden md:flex">
-            <button className="bg-white text-blue-700 px-6 py-2.5 rounded-lg font-semibold shadow-lg hover:bg-gray-50 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 border border-blue-200">
+            <button className="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold shadow-lg 
+              hover:bg-blue-500 hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-150 
+              border border-blue-500/40">
               Add Item
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle */}
           <div className="md:hidden absolute right-4">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="focus:outline-none p-2 rounded-lg hover:bg-blue-700 transition bg-blue-600/50"
+              className="focus:outline-none p-2 rounded-lg bg-gray-800 hover:bg-gray-700 
+                border border-gray-700 transition"
             >
               <svg
-                className="w-6 h-6 text-white"
+                className="w-6 h-6 text-gray-200"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -53,21 +58,22 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden bg-blue-700/95 backdrop-blur-sm rounded-lg mt-2 shadow-2xl border border-blue-500">
+          <div className="md:hidden bg-gray-800 border border-gray-700 rounded-lg mt-2 shadow-2xl">
             <div className="px-2 pt-2 pb-3">
-              <div className="pb-1">
-                <button 
-                  className="w-full bg-white text-blue-700 px-4 py-3 rounded-lg font-semibold text-base shadow-lg hover:bg-gray-50 transition transform hover:scale-105"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Add New Item
-                </button>
-              </div>
+              <button
+                className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold text-base 
+                  shadow-lg hover:bg-blue-500 hover:shadow-xl transform hover:scale-105 
+                  transition-all duration-150"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Add New Item
+              </button>
             </div>
           </div>
         )}
+
       </div>
     </nav>
   );

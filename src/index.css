@@ -2,21 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-/* Custom fonts */
-.font-handwritten { font-family: 'Dancing Script', cursive; }
-.font-slanted { font-family: 'Roboto Slab', serif; font-style: italic; }
-
-
-
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
-
+/* Remove global body font */
 body {
-  font-family: 'Caveat', cursive;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Or if you want to keep it specific to handwritten class */
+/* Optional: you can still keep the handwritten class for occasional use */
 .font-handwritten {
   font-family: 'Caveat', cursive;
 }
+
+.font-slanted {
+  font-family: 'Roboto Slab', serif;
+  font-style: italic;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
